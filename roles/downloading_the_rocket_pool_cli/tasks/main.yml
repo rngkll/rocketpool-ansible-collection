@@ -1,0 +1,21 @@
+---
+# tasks file for downloading_the_rocket_pool_cli
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: /opt/rocketpool/bin
+    state: directory
+    mode: '0755'
+
+- name: Download rocketpool binary for amd64
+  get_url:
+    url: https://github.com/rocket-pool/smartnode-install/releases/latest/download/rocketpool-cli-linux-amd64
+    dest: /opt/rocketpool/bin/rocketpool
+    mode: '0755'
+
+- name: Get rocketpool cli version
+  ansible.builtin.shell: /opt/rocketpool/bin/rocketpool --version
+  register: rocketpool_version
+
+- name: Print rocketpool cli version
+  ansible.builtin.debug:
+    var: rocketpool_version.stdout

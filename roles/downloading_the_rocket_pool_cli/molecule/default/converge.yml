@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include downloading_the_rocket_pool_cli"
+      include_role:
+        name: "downloading_the_rocket_pool_cli"

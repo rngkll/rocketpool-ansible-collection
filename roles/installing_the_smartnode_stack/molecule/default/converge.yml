@@ -1,0 +1,7 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include installing_the_smartnode_stack"
+      include_role:
+        name: "installing_the_smartnode_stack"

@@ -1,0 +1,25 @@
+---
+# tasks file for node_presteps
+- name: Create the rocketpool user
+  ansible.builtin.user:
+    name: "{{ rocketpool_user }}"
+    comment: Rocketpool admin
+    groups: sudo
+
+- name: Create a btrfs filesystem for blockchain data device.
+  community.general.filesystem:
+    fstype: btrfs
+    dev: /dev/nvme1n1
+
+- name: Show variable
+  ansible.builtin.debug:
+    msg: "{{ ansible_facts['devices']['nvme1n1']}}"
+
+- name: Mount blockchain data device.
+  ansible.posix.mount:
+    path: /srv/data
+    src: UUID=82721899-0f50-4b46-9433-efd5350d3d5d
+    fstype: btrfs
+    boot: yes
+    opts: noatime
+    state: present

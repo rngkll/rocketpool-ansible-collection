@@ -1,0 +1,19 @@
+---
+# This playbook deploys the whole application stack in this site.
+- name: Downloading the Rocket Pool CLI
+  hosts: all
+  remote_user: root
+  # become: True
+  # become_method: sudo
+
+  roles:
+    - node_presteps
+
+- name: Downloading the Rocket Pool CLI
+  hosts: all
+  remote_user: root
+  become: True
+  become_user: "{{ rocketpool_user }}"
+
+  roles:
+    - downloading_the_rocket_pool_cli
